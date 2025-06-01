@@ -1,17 +1,21 @@
 <script lang="ts">
-    import AlbumCard from '$lib/components/AlbumCard.svelte';
-    import type { Album } from '$lib/types';
+    import RandomPhotoDisplay from '$lib/components/RandomPhotoDisplay.svelte';
+    import type { Photo } from '$lib/types';
 
     export let data: {
-        albums: Album[];
+        photos: Photo[];
     };
 </script>
 
 <div class="flex flex-col items-center">
-    <h1 class="text-5xl mb-8">Photography</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {#each data.albums as album, i}
-            <AlbumCard {album} delay={i} />
-        {/each}
+    <h1 class="text-5xl mb-4">NekPics</h1>
+    <p class="text-lg text-center max-w-2xl mb-8 px-4">
+        Professional portrait and landscape photography services. 
+        Specializing in family portraits, senior photos, and wedding photography to create 
+        beautiful memories that last a lifetime.
+    </p>
+    
+    <div class="w-full">
+        <RandomPhotoDisplay photos={data.photos} />
     </div>
 </div>

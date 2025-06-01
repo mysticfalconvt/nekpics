@@ -189,6 +189,17 @@
 
         <div class="flex justify-between items-center w-full mt-4">
             <button class="btn btn-circle" on:click={prevSlide}>❮</button>
+            {#if allowDownload}
+                <a
+                    class="btn btn-secondary"
+                    href={photoList[currentIndex].url.replace(/is(Web|Thumb)=true/, 'fullRes=true')}
+                    download
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Download Full Res
+                </a>
+            {/if}
             <button class="btn btn-accent" on:click={toggleSlideshow}>
                 {#if isSlideshow}
                     Stop Slideshow

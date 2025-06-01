@@ -2,6 +2,7 @@
 	import '$lib/app.css';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
+	import { PUBLIC_UMAMI_WEBSITE_ID } from '$env/static/public';
 
 	let currentTheme = 'autumn';
 
@@ -34,6 +35,16 @@
 		});
 	});
 </script>
+
+<svelte:head>
+	{#if PUBLIC_UMAMI_WEBSITE_ID}
+		<script
+			defer
+			src="https://umami.rboskind.com/script.js"
+			data-website-id={PUBLIC_UMAMI_WEBSITE_ID}
+		></script>
+	{/if}
+</svelte:head>
 
 <div class="min-h-screen bg-base-100">
 	<div class="navbar bg-base-200">

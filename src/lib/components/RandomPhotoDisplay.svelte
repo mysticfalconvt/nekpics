@@ -64,6 +64,8 @@
                     src={currentPhoto.url} 
                     alt={currentPhoto.description} 
                     class="max-w-full max-h-full object-contain transition-opacity duration-500 cursor-zoom-in"
+                    draggable="false"
+                    on:contextmenu|preventDefault
                 />
             </button>
         </div>
@@ -87,6 +89,8 @@
             src={currentPhoto.url}
             alt={currentPhoto.description}
             class="max-w-full max-h-full object-contain shadow-2xl cursor-zoom-out"
+            draggable="false"
+            on:contextmenu|preventDefault
         />
         <button class="absolute top-4 right-4 btn btn-sm btn-circle btn-error z-50" on:click={closeZoom}>
             ✕

@@ -10,12 +10,11 @@
     };
 
     const albumName = data.albumNamesById[data.albumId] || 'default';
-    const allowDownload = albumName.toLowerCase().includes('customer');
 </script>
 
 <div class="flex flex-col w-full items-center justify-center text-base-content">
     <h1 class="text-5xl m-5">{albumName}</h1>
     <div class="mt-4 w-full flex items-center justify-center">
-        <PhotoCarousel photoList={data.photos} allowDownload={allowDownload} />
+        <PhotoCarousel photoList={data.photos} allowDownload={true} />
     </div>
 </div> 

@@ -43,6 +43,7 @@
 		<div class="flex-none gap-2">
 			<a href="/albums" class="btn btn-ghost">Albums</a>
 			<a href="/customer-albums" class="btn btn-ghost">Customer Albums</a>
+			<a href="/pricing" class="btn btn-ghost">Pricing</a>
 			<button class="btn btn-ghost" on:click={toggleTheme}>
 				{#if currentTheme === 'autumn'}
 					<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">

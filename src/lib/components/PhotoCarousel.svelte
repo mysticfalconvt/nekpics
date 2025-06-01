@@ -1,8 +1,10 @@
 <script lang="ts">
     import type { Photo } from '$lib/types';
     import { onMount, onDestroy } from 'svelte';
+    import { browser } from '$app/environment';
 
     export let photoList: Photo[] = [];
+    export let allowDownload: boolean = false;
 
     let currentIndex = 0;
     let isSlideshow = false;
@@ -56,13 +58,13 @@
     }
 
     function exitFullscreen() {
-        if (document.fullscreenElement) {
+        if (browser && document.fullscreenElement) {
             document.exitFullscreen();
         }
     }
 
     function handleFullscreenChange() {
-        if (!document.fullscreenElement && isSlideshow) {
+        if (browser && !document.fullscreenElement && isSlideshow) {
             stopSlideshow();
         }
     }
@@ -93,18 +95,21 @@
     }
 
     onMount(() => {
-        document.addEventListener('fullscreenchange', handleFullscreenChange);
-        document.addEventListener('mousemove', handleMouseMove);
-        document.addEventListener('keydown', handleKeydown);
+        if (browser) {
+            document.addEventListener('fullscreenchange', handleFullscreenChange);
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('keydown', handleKeydown);
+        }
     });
     onDestroy(() => {
-        document.removeEventListener('fullscreenchange', handleFullscreenChange);
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('keydown', handleKeydown);
+        if (browser) {
+            document.removeEventListener('fullscreenchange', handleFullscreenChange);
+            document.removeEventListener('mousemove', handleMouseMove);
+            document.removeEventListener('keydown', handleKeydown);
+        }
         if (intervalId) clearInterval(intervalId);
         if (closeTimeout) clearTimeout(closeTimeout);
     });
-
     // Pagination logic: show window of 11 (current ±5), always show first/last, ellipsis if needed
     $: {
         const total = photoList.length;
@@ -125,11 +130,21 @@
 <div class="w-full max-w-4xl mx-auto" bind:this={carousel}>
     {#if isSlideshow}
         <div class="relative w-full h-[600px] flex items-center justify-center bg-black">
-            <img
-                src={photoList[currentIndex].url}
-                class="w-full h-full object-contain"
-                alt={photoList[currentIndex].description}
-            />
+            {#if !allowDownload}
+                <img
+                    src={photoList[currentIndex].url}
+                    class="w-full h-full object-contain"
+                    alt={photoList[currentIndex].description}
+                    draggable="false"
+                    on:contextmenu|preventDefault
+                />
+            {:else}
+                <img
+                    src={photoList[currentIndex].url}
+                    class="w-full h-full object-contain"
+                    alt={photoList[currentIndex].description}
+                />
+            {/if}
             {#if showClose}
                 <button class="absolute top-4 right-4 btn btn-sm btn-circle btn-error z-50" on:click={stopSlideshow}>
                     ✕
@@ -152,11 +167,21 @@
                         on:click={() => openZoom(i)}
                         on:keydown={(e) => { if (e.key === 'Enter' || e.key === ' ') openZoom(i); }}
                     >
-                        <img
-                            src={photo.url}
-                            class="w-full h-full object-contain cursor-zoom-in"
-                            alt={photo.description}
-                        />
+                        {#if !allowDownload}
+                            <img
+                                src={photo.url}
+                                class="w-full h-full object-contain cursor-zoom-in"
+                                alt={photo.description}
+                                draggable="false"
+                                on:contextmenu|preventDefault
+                            />
+                        {:else}
+                            <img
+                                src={photo.url}
+                                class="w-full h-full object-contain cursor-zoom-in"
+                                alt={photo.description}
+                            />
+                        {/if}
                     </button>
                 </div>
             {/each}
@@ -201,14 +226,24 @@
             on:click={closeZoom}
             on:keydown={(e) => { if (e.key === 'Enter' || e.key === ' ') closeZoom(); }}
         >
-            <img
-                src={photoList[zoomedIndex].url}
-                alt={photoList[zoomedIndex].description}
-                class="max-w-full max-h-full object-contain shadow-2xl cursor-zoom-out"
-            />
+            {#if !allowDownload}
+                <img
+                    src={photoList[zoomedIndex].url}
+                    alt={photoList[zoomedIndex].description}
+                    class="max-w-full max-h-full object-contain shadow-2xl cursor-zoom-out"
+                    draggable="false"
+                    on:contextmenu|preventDefault
+                />
+            {:else}
+                <img
+                    src={photoList[zoomedIndex].url}
+                    alt={photoList[zoomedIndex].description}
+                    class="max-w-full max-h-full object-contain shadow-2xl cursor-zoom-out"
+                />
+            {/if}
             <button class="absolute top-4 right-4 btn btn-sm btn-circle btn-error z-50" on:click={closeZoom}>
                 ✕
             </button>
         </div>
     {/if}
-</div> 
+</div>

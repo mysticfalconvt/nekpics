@@ -1,0 +1,35 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: autumn, sunset;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --rounded-box: 1rem;
+        --rounded-btn: 0.5rem;
+        --rounded-badge: 1.9rem;
+        --animation-btn: 0.25s;
+        --animation-input: 0.2s;
+        --btn-focus-scale: 0.98;
+        --border-btn: 1px;
+        --tab-border: 1px;
+        --tab-radius: 0.5rem;
+    }
+}
+
+/* DaisyUI base styles */
+@layer components {
+    .btn {
+        @apply inline-flex items-center justify-center;
+    }
+    .navbar {
+        @apply flex items-center;
+    }
+    .card {
+        @apply bg-base-100 rounded-box;
+    }
+}

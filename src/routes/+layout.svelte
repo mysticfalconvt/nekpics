@@ -2,7 +2,7 @@
 	import '$lib/app.css';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
-	import { PUBLIC_UMAMI_WEBSITE_ID } from '$env/static/public';
+	const PUBLIC_UMAMI_WEBSITE_ID = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
 
 	let currentTheme = 'autumn';
 

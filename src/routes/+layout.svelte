@@ -6,6 +6,7 @@
 </script>
 
 <svelte:head>
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 	{#if PUBLIC_UMAMI_WEBSITE_ID}
 		<script
 			defer

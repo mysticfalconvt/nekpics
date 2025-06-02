@@ -2,8 +2,16 @@
 	import '$lib/app.css';
 	import { page } from '$app/stores';
 	import Nav from '$lib/components/Nav.svelte';
-	const PUBLIC_UMAMI_WEBSITE_ID = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
-
+	
+	let PUBLIC_UMAMI_WEBSITE_ID: string | undefined;
+	
+	// Use a simple try-catch without async/await
+	try {
+		PUBLIC_UMAMI_WEBSITE_ID = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
+	} catch (e) {
+		PUBLIC_UMAMI_WEBSITE_ID = undefined;
+	}
+	
 	$: pageTitle = $page.url.pathname === '/' 
 		? 'Robert Boskind Photography'
 		: `Robert Boskind Photography - ${$page.url.pathname.slice(1).split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}`;

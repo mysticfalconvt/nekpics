@@ -50,6 +50,8 @@
 		]
 	},
 	"dependencies": {
+		"@types/nodemailer": "^6.4.17",
+		"nodemailer": "^7.0.3",
 		"sharp": "^0.34.2",
 		"theme-change": "^2.5.0"
 	}

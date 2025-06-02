@@ -47,7 +47,7 @@
                 <a href="/" class="btn btn-ghost text-xl">NekPics</a>
             </div>
             <div class="flex-none lg:hidden">
-                <button class="btn btn-square btn-ghost" on:click={toggleDrawer}>
+                <button class="btn btn-square btn-ghost" on:click={toggleDrawer} aria-label="Toggle menu">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 stroke-current">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
@@ -57,6 +57,7 @@
                 <a href="/albums" class="btn btn-ghost">Albums</a>
                 <a href="/customer-albums" class="btn btn-ghost">Customer Albums</a>
                 <a href="/pricing" class="btn btn-ghost">Pricing</a>
+                <a href="/contact" class="btn btn-ghost">Contact</a>
                 <button class="btn btn-ghost" on:click={toggleTheme}>
                     {#if currentTheme === 'autumn'}
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -72,10 +73,10 @@
         </div>
     </div>
     <div class="drawer-side z-50">
-        <label for="drawer-toggle" class="drawer-overlay" on:click={toggleDrawer}></label>
+        <button type="button" class="drawer-overlay" on:click={toggleDrawer} on:keydown={e => e.key === 'Escape' && toggleDrawer()} aria-label="Close menu"></button>
         <div class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
             <div class="flex justify-between items-center mb-4">
-                <button class="btn btn-ghost btn-circle" on:click={toggleDrawer}>
+                <button class="btn btn-ghost btn-circle" on:click={toggleDrawer} aria-label="Close menu">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -97,6 +98,7 @@
                 <li><a href="/albums" on:click={toggleDrawer}>Albums</a></li>
                 <li><a href="/customer-albums" on:click={toggleDrawer}>Customer Albums</a></li>
                 <li><a href="/pricing" on:click={toggleDrawer}>Pricing</a></li>
+                <li><a href="/contact" on:click={toggleDrawer}>Contact</a></li>
             </ul>
         </div>
     </div>

@@ -5,7 +5,7 @@
 <div class="flex flex-col items-center py-12">
     <h1 class="text-5xl font-bold mb-6">Pricing</h1>
     <p class="text-lg text-center max-w-2xl mb-10">
-        Transparent, simple pricing for all your photography needs. If you have special requests or want a custom package, please <a href="mailto:rob@boskind.tech" class="text-accent underline">contact me</a>.
+        Transparent, simple pricing for all your photography needs. If you have special requests or want a custom package, please <a href="/contact" class="text-accent underline">contact me</a>.
     </p>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-4xl">
         <div class="bg-base-200 rounded-lg shadow p-8 flex flex-col items-center">

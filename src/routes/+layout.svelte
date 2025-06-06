@@ -2,15 +2,10 @@
 	import '$lib/app.css';
 	import { page } from '$app/stores';
 	import Nav from '$lib/components/Nav.svelte';
+	import { PUBLIC_UMAMI_WEBSITE_ID } from '$env/static/public';
 	
-	let PUBLIC_UMAMI_WEBSITE_ID: string | undefined;
-	
-	// Use a simple try-catch without async/await
-	try {
-		PUBLIC_UMAMI_WEBSITE_ID = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
-	} catch (e) {
-		PUBLIC_UMAMI_WEBSITE_ID = undefined;
-	}
+	// Debug logging
+	console.log('PUBLIC_UMAMI_WEBSITE_ID:', PUBLIC_UMAMI_WEBSITE_ID);
 	
 	$: pageTitle = $page.url.pathname === '/' 
 		? 'Robert Boskind Photography'

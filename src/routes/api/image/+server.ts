@@ -40,7 +40,7 @@ export const GET: RequestHandler = async ({ url }) => {
 
 		// Get the image content
 		const imageBuffer = await response.arrayBuffer();
-		const buffer = Buffer.from(imageBuffer);
+		const buffer: Buffer = Buffer.from(new Uint8Array(imageBuffer));
 
 		// Process the image with Sharp only if not full resolution
 		let processedBuffer = buffer;
@@ -61,7 +61,7 @@ export const GET: RequestHandler = async ({ url }) => {
 		return new Response(processedBuffer, {
 			headers: {
 				'Content-Type': 'image/jpeg',
-				'Cache-Control': 'max-age=31536000, immutable',
+				'Cache-Control': 'max-age=604800, immutable',
 				'Access-Control-Allow-Origin': '*'
 			}
 		});

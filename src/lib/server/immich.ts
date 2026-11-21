@@ -61,7 +61,7 @@ export async function getAlbumAssets(albumId: string): Promise<ImmichAsset[]> {
 	let page: number | string | null = 1;
 
 	while (page !== null) {
-		const response = await fetch(`${baseUrl}/api/search/metadata`, {
+		const response: Response = await fetch(`${baseUrl}/api/search/metadata`, {
 			method: 'POST',
 			headers: immichHeaders(apiKey),
 			body: JSON.stringify({
@@ -75,7 +75,8 @@ export async function getAlbumAssets(albumId: string): Promise<ImmichAsset[]> {
 			throw error(response.status, `HTTP error! status: ${response.status}`);
 		}
 
-		const data = await response.json();
+		const data: { assets?: { items?: ImmichAsset[]; nextPage?: number | string | null } } =
+			await response.json();
 		const pageAssets = data?.assets?.items ?? [];
 		assets.push(...pageAssets);
 		page = data?.assets?.nextPage ?? null;

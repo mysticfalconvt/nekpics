@@ -20,7 +20,11 @@ export default ts.config(
 		languageOptions: {
 			globals: { ...globals.browser, ...globals.node }
 		},
-		rules: { 'no-undef': 'off' }
+		rules: {
+			'no-undef': 'off',
+			// Only needed when the app is served under a base path; this site isn't.
+			'svelte/no-navigation-without-resolve': 'off'
+		}
 	},
 	{
 		files: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
@@ -32,5 +36,10 @@ export default ts.config(
 				svelteConfig
 			}
 		}
+	},
+	{
+		// SvelteKit's app.d.ts template uses empty interfaces as placeholders.
+		files: ['src/app.d.ts'],
+		rules: { '@typescript-eslint/no-empty-object-type': 'off' }
 	}
 );

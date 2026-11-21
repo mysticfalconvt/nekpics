@@ -1,0 +1,18 @@
+# Settings for pnpm (this is a single package, not a monorepo).
+
+# Refuse package versions published less than 14 days ago. Most malicious
+# releases are caught and pulled within days, so this keeps them out.
+minimumReleaseAge: 20160
+
+# Packages allowed to run install scripts (pnpm 10 blocks them by default).
+onlyBuiltDependencies:
+  - esbuild
+ignoredBuiltDependencies:
+  # sharp 0.33+ ships prebuilt binaries; its install script is not needed.
+  - sharp
+
+# Patched versions of nested dependencies, within the same major version.
+overrides:
+  flatted@<3.4.2: ^3.4.2
+  source-map-js@<1.2.2: ^1.2.2
+  cookie@<0.7.0: ^0.7.0

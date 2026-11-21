@@ -2,7 +2,6 @@
     import type { Album } from '$lib/types';
     import { fade } from 'svelte/transition';
     import { onMount, onDestroy } from 'svelte';
-    import { browser } from '$app/environment';
     
     export let album: Album;
     export let delay: number = 0;

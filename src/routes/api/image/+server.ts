@@ -58,7 +58,7 @@ export const GET: RequestHandler = async ({ url }) => {
 		}
 
 		// Return the processed image
-		return new Response(processedBuffer, {
+		return new Response(new Uint8Array(processedBuffer), {
 			headers: {
 				'Content-Type': 'image/jpeg',
 				'Cache-Control': 'max-age=604800, immutable',

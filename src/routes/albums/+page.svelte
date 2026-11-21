@@ -21,7 +21,7 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full max-w-[2200px]">
-        {#each data.albums as album, index}
+        {#each data.albums as album, index (album.id)}
             <AlbumCard
                 {album}
                 delay={index}

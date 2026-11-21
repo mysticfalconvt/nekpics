@@ -1,15 +1,20 @@
 <script lang="ts">
 	import '$lib/app.css';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import Nav from '$lib/components/Nav.svelte';
 	import { PUBLIC_UMAMI_WEBSITE_ID } from '$env/static/public';
-	
-	// Debug logging
-	console.log('PUBLIC_UMAMI_WEBSITE_ID:', PUBLIC_UMAMI_WEBSITE_ID);
-	
-	$: pageTitle = $page.url.pathname === '/' 
-		? 'Robert Boskind Photography'
-		: `Robert Boskind Photography - ${$page.url.pathname.slice(1).split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}`;
+
+	let { children } = $props();
+
+	const pageTitle = $derived(
+		page.url.pathname === '/'
+			? 'Robert Boskind Photography'
+			: `Robert Boskind Photography - ${page.url.pathname
+					.slice(1)
+					.split('-')
+					.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+					.join(' ')}`
+	);
 </script>
 
 <svelte:head>
@@ -28,6 +33,6 @@
 	<Nav />
 
 	<main class="container mx-auto px-4 py-8">
-		<slot />
+		{@render children()}
 	</main>
 </div>

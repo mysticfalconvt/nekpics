@@ -153,7 +153,7 @@
         </div>
     {:else}
         <div class="carousel w-full h-[600px] rounded-box">
-            {#each photoList as photo, i}
+            {#each photoList as photo, i (photo.url)}
                 <div
                     id="slide-{i}"
                     class="carousel-item relative w-full"
@@ -211,7 +211,7 @@
         </div>
 
         <div class="flex justify-center w-full py-2 gap-1 flex-wrap">
-            {#each visibleIndexes as idx, j}
+            {#each visibleIndexes as idx (idx)}
                 {#if idx === -1 || idx === -2}
                     <span class="px-2 text-lg">…</span>
                 {:else}

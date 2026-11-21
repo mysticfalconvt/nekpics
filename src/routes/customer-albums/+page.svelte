@@ -10,7 +10,7 @@
 <div class="flex flex-col items-center">
     <h1 class="text-5xl mb-8">Customer Albums</h1>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {#each data.albums as album, i}
+        {#each data.albums as album, i (album.id)}
             <AlbumCard {album} delay={i} numberOfAlbums={data.albums.length} allowDownload={true} link={`/customer-albums/${album.id}`} />
         {/each}
     </div>

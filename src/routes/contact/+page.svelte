@@ -28,7 +28,7 @@
 
             // Track the form submission event
             if (typeof window !== 'undefined' && 'umami' in window) {
-                (window as any).umami.track('contact_form_submit', {
+                (window as unknown as { umami: { track: (event: string, data?: object) => void } }).umami.track('contact_form_submit', {
                     name: name,
                     email: email,
                     messageLength: message.length
